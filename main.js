@@ -1,4 +1,5 @@
-import { Client } from "whatsapp-web.js";
+import pkg from 'whatsapp-web.js';
+const { Client, LocalAuth} = pkg;
 import qrcode from "qrcode-terminal";
 import sendMessage from './sendMessage.js';
 
@@ -6,7 +7,10 @@ import sendMessage from './sendMessage.js';
 // Classe que cria uma instância do cliente, sendo esse o starting point para a interação com a API Whatsapp Web.
 // Basicamente ao criarmos essa instância estamos criando uma janela no navegador programada com js, como se estivessemos abrindo o whatsapp web no navegador.
 const client = new Client({
-    webVersionCache: { // Essa opção foi adicionada para evitar um erro no LocalCache
+    authStrategy: new LocalAuth({ // Essa opção tem a função de armazenar a session em um diretório para assim evitar de ficar toda hora lendo qrcode.
+        dataPath: "sessions"
+    }),
+    webVersionCache: { // Essa opção foi adicionada para evitar um erro no LocalCache.
         remotePath: 'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2412.54.html',
         type: 'remote'
     } 
