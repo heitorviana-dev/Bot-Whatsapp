@@ -1,5 +1,7 @@
-const { Client } = require('whatsapp-web.js');
-const qrcode = require("qrcode-terminal");
+import { Client } from "whatsapp-web.js";
+import qrcode from "qrcode-terminal";
+import sendMessage from './sendMessage.js';
+
 
 // Classe que cria uma instância do cliente, sendo esse o starting point para a interação com a API Whatsapp Web.
 // Basicamente ao criarmos essa instância estamos criando uma janela no navegador programada com js, como se estivessemos abrindo o whatsapp web no navegador.
@@ -19,6 +21,10 @@ client.on('ready', () => {
 client.on('qr', (qr) => {
     qrcode.generate(qr, {small: true}); // qrcode.generate(<conteúdo do qrcode>, <options>);
 });
+
+// Quando uma nova mensagem é enviada, é emitido o evento message_create, o qual retorna a mensagem(message no parametro).
+await sendMessage(client);
+
 
 // Inicia o cliente e permite a interação com o whatsapp web permitindo enviar e receber mensagens, e outras operações disponíveis na api.
 client.initialize();

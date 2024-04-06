@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "botwhatsapp",
   "version": "1.0.0",
   "description": "",
@@ -14,4 +15,5 @@
     "qrcode-terminal": "^0.12.0",
     "whatsapp-web.js": "^1.23.0"
   }
+  
 }
